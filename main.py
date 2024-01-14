@@ -1,6 +1,7 @@
 import streamlit as st
 from rembg import remove
 from PIL import Image
+from io import BytesIO
 
 
 
@@ -14,9 +15,18 @@ def main():
 
     if uploadfile is not None:
         st.image(uploadfile, caption='Uploaded image')
-        st.write ("Processing.... please wait")
         result=removebg(uploadfile)
+
+        result_image_io=BytesIO()
+        result.save(result_image_io, format='PNG')
         st.image (result, caption="Successfully removed")
+
+        st.download_button(
+            label="Download Result Image",
+            data=result_image_io.getvalue(),
+            file_name="background_removed_image.png",
+            key="download_button"
+        )
 
 
 if __name__=='__main__':
