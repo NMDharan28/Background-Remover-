@@ -1,4 +1,4 @@
-**Background Remover Bot**
+**Background Remover Bot:**
 
 **Description:**
 
